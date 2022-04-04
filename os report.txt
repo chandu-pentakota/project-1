@@ -1,53 +1,20 @@
-#include<iostream> 
-using namespace std; 
-void calculate_waiting_time(int process_id[], int total_process, int burst_time[], int waiting_time[], int quantum_time) { 
-	int t = 0; 
-	int remaining_burst_time[total_process]; 
-	for (int i = 0 ; i < total_process ; i++) 
-		remaining_burst_time[i] = burst_time[i]; 
-	while (1) { 
-		bool completed = true; 
-		for (int i = 0 ; i < total_process; i++) { 
-			if (remaining_burst_time[i] > 0) { 
-				completed = false; 
-				if (remaining_burst_time[i] > quantum_time) { 
-					t += quantum_time; 
-					remaining_burst_time[i] -= quantum_time; 
-				} 
-				else { 
-					t = t + remaining_burst_time[i]; 
-					waiting_time[i] = t - burst_time[i]; 
-					remaining_burst_time[i] = 0; 
-				} 
-			} 
-		} 
-		if (completed == true) 
-      		break; 
-	} 
-} 
-void calculate_turn_around_time(int process_id[], int total_process, int burst_time[], int waiting_time[], int turn_around_time[]){
-	for (int i = 0; i < total_process ; i++) 
-		turn_around_time[i] = burst_time[i] + waiting_time[i]; 
-}
+# Behavioural Diagram
 
-void calculate_average_time(int process_id[], int total_process, int burst_time[], int quantum_time) { 
-	int waiting_time[total_process], turn_around_time[total_process], total_wt = 0, total_tat = 0; 
-	calculate_waiting_time(process_id, total_process, burst_time, waiting_time, quantum_time); 
-	calculate_turn_around_time(process_id, total_process, burst_time, waiting_time, turn_around_time); 
-	cout << "Processes "<< " Burst time " << " Waiting time " << " Turn around time\n"; 
-	for (int i=0; i<total_process; i++) { 
-		total_wt = total_wt + waiting_time[i]; 
-		total_tat = total_tat + turn_around_time[i]; 
-		cout << " " << i << "\t\t" << burst_time[i] <<"\t " << waiting_time[i] <<"\t\t " << turn_around_time[i] <<endl; 
-	} 
-	cout << "\nAverage waiting time = " << (float)total_wt / (float)total_process; 
-	cout << "\nAverage turn around time = " << (float)total_tat / (float)total_process; 
-} 
-int main() { 
-	int process_id[] = { 0, 1, 2}; 
-	int burst_time[] = {9, 6, 6}; 
-	int quantum_time = 2; 
-	int total_process = sizeof process_id / sizeof process_id[0]; 
-	calculate_average_time(process_id, total_process, burst_time, quantum_time); 
-	return 0; 
-} 
+## HIGH LEVEL FLOWCHART
+
+![High Level Flow Chart](https://user-images.githubusercontent.com/68550769/160358330-e7e74f2d-d2db-4ffd-a065-33be00d5cea2.jpeg)
+
+
+## LOW LEVEL FLOWCHART
+
+![flowchart](https://user-images.githubusercontent.com/85921878/160228205-1a73a1cd-c070-4b2b-93cc-9c9b4f52b311.jpg)
+
+
+# Structural Diagram
+
+## HIGH LEVEL UML 
+![High level UML](https://user-images.githubusercontent.com/59719836/161041170-36d9c4ba-3fa1-44c9-b93c-dfaeac61ff8d.jpeg)
+
+
+## LOW LEVEL UML Diagram
+![LLL](https://user-images.githubusercontent.com/79264869/161004389-460ecf76-a2eb-4945-8d17-c865dce4a39b.jpeg)
